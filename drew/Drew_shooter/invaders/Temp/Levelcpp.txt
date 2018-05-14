@@ -1,0 +1,66 @@
+#include "laser.h"
+#include "invader.h"
+#include "level.h"
+
+#include "../object.h"
+#include "../audio.h"
+#include "../graphics.h"
+#include "../screen.h"
+#include "../controls.h"
+
+#include <stdio.h>
+
+const int LEVEL_WIDTH = 16;
+const int LEVEL_HEIGHT = 8;
+
+
+
+int LEVEL_START_X = PLAY_FIELD_LEFT - LEVEL_WIDTH * 50;
+int LEVEL_START_Y = PLAY_FIELD_TOP - LEVEL_HEIGHT * 2;
+
+
+struct Level: public Object
+{
+	Image image;
+	int position[2];
+	bool alive;
+
+
+	void update(void)
+	{
+		if(LEVEL_START_X > PLAY_FIELD_RIGHT + LEVEL_WIDTH)
+		{
+			LEVEL01_START_X = PLAY_FIELD_LEFT - LEVEL01 * 50;
+		}
+	
+
+		LEVEL_START_X++;
+
+	
+	}
+
+	void draw(void)
+
+
+	{   alive = true;
+		GLfloat fpos[] = { LEVEL_START_X, LEVEL_START_Y };
+		if (alive)
+		{
+			::draw(image, fpos);
+		}
+	}
+
+};
+
+Level level;
+
+int load_level(Object *object_array[])
+{
+	load_texture(level.image.texture, "Level01.bmp");
+	level.image.dimension[0] = LEVEL_WIDTH / 2;
+	level.image.dimension[1] = LEVEL_HEIGHT / 2;
+	
+	*object_array = &level01;
+	object_array++;
+	return LEVEL_TOTAL;
+}

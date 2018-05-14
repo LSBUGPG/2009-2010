@@ -1,0 +1,5 @@
+const int LEVEL_TOTAL = 1; // 1 background per level
+
+struct Object;
+
+int load_level(Object *object_array[]);  // Level01
